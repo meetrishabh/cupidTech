@@ -1,49 +1,28 @@
-<div id="app">
-  <nav class="navbar navbar-expand navbar-dark bg-dark">
-    <a href="#" class="navbar-brand">bezKoder</a>
+<div id="app" [class.full-page]="isLoginPage">
+  <!-- Conditional rendering of navbar -->
+  <nav
+    class="navbar navbar-expand navbar-dark"
+    *ngIf="!isLoginPage"
+    [ngStyle]="{ 'background': 'linear-gradient(to bottom right, #00695c, #004d40)' }"
+  >
+    <a href="#" class="navbar-brand">My Cupid Tech</a>
     <ul class="navbar-nav mr-auto" routerLinkActive="active">
-      <li class="nav-item">
-        <a href="/home" class="nav-link" routerLink="home">Home </a>
+      
+      <li class="nav-item" *ngIf="isLoggedIn">
+        <a href="/user" class="nav-link" routerLink="user">User</a>
       </li>
-      @if (showAdminBoard) {
-        <li class="nav-item">
-          <a href="/admin" class="nav-link" routerLink="admin">Admin Board</a>
-        </li>
-      }
-      @if (showModeratorBoard) {
-        <li class="nav-item">
-          <a href="/mod" class="nav-link" routerLink="mod">Moderator Board</a>
-        </li>
-      }
-      @if (isLoggedIn) {
-        <li class="nav-item">
-          <a href="/user" class="nav-link" routerLink="user">User</a>
-        </li>
-      }
     </ul>
 
-    @if (!isLoggedIn) {
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <a href="/register" class="nav-link" routerLink="register">Sign Up</a>
-        </li>
-        <li class="nav-item">
-          <a href="/login" class="nav-link" routerLink="login">Login</a>
-        </li>
-      </ul>
-    } @else {
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <a href="/profile" class="nav-link" routerLink="profile">{{ username }}</a>
-        </li>
-        <li class="nav-item">
-          <a href class="nav-link" (click)="logout()">LogOut</a>
-        </li>
-      </ul>
-    }
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item" *ngIf="isLoggedIn">
+        <a href="/profile" class="nav-link" routerLink="profile">{{ username }}</a>
+      </li>
+      <li class="nav-item" *ngIf="isLoggedIn">
+        <a href="#" class="nav-link" (click)="logout()">LogOut</a>
+      </li>
+    </ul>
   </nav>
 
-  <div class="container">
-    <router-outlet></router-outlet>
-  </div>
+  <!-- Main Content -->
+  <router-outlet></router-outlet>
 </div>

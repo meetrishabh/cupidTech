@@ -1,5 +1,119 @@
 <div class="container">
   <header class="jumbotron">
-    <p>{{ content }}</p>
+    <h1 class="display-4">Welcome to the Employee Management Dashboard</h1>
   </header>
+
+  <!-- KPIs Section -->
+  <div class="row">
+    <div class="col-md-3">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Total Employees</h5>
+          <p class="card-text">{{ employeeStats.totalEmployees }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Active Employees</h5>
+          <p class="card-text">{{ employeeStats.activeEmployees }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">New Hires (This Month)</h5>
+          <p class="card-text">{{ employeeStats.newHires }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Average Performance Rating</h5>
+          <p class="card-text">{{ employeeStats.avgPerformanceRating }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Department Breakdown Table -->
+  <div class="card mt-4">
+    <div class="card-header">
+      <h4>Department Breakdown</h4>
+    </div>
+    <div class="card-body">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Department</th>
+            <th>Employee Count</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>HR</td>
+            <td>{{ employeeStats.departments.HR }}</td>
+          </tr>
+          <tr>
+            <td>IT</td>
+            <td>{{ employeeStats.departments.IT }}</td>
+          </tr>
+          <tr>
+            <td>Sales</td>
+            <td>{{ employeeStats.departments.Sales }}</td>
+          </tr>
+          <tr>
+            <td>Marketing</td>
+            <td>{{ employeeStats.departments.Marketing }}</td>
+          </tr>
+          <tr>
+            <td>Finance</td>
+            <td>{{ employeeStats.departments.Finance }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Employee Performance Table -->
+  <div class="card mt-4">
+    <div class="card-header">
+      <h4>Employee Performance</h4>
+    </div>
+    <div class="card-body">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Employee Name</th>
+            <th>Performance Rating</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Employee 1</td>
+            <td>4.2</td>
+          </tr>
+          <tr>
+            <td>Employee 2</td>
+            <td>4.0</td>
+          </tr>
+          <tr>
+            <td>Employee 3</td>
+            <td>4.5</td>
+          </tr>
+          <tr>
+            <td>Employee 4</td>
+            <td>4.1</td>
+          </tr>
+          <tr>
+            <td>Employee 5</td>
+            <td>4.3</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>

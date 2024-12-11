@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-const AUTH_API = 'http://localhost:8080/api/auth/';
+const AUTH_API = 'http://localhost:8081/'; // Base API URL
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -14,22 +14,11 @@ const httpOptions = {
 export class AuthService {
   constructor(private http: HttpClient) {}
 
-  login(username: string, password: string): Observable<any> {
+  // Login method
+  login(email: string, password: string): Observable<any> {
     return this.http.post(
-      AUTH_API + 'signin',
+      AUTH_API + 'employee/login',  // Login URL
       {
-        username,
-        password,
-      },
-      httpOptions
-    );
-  }
-
-  register(username: string, email: string, password: string): Observable<any> {
-    return this.http.post(
-      AUTH_API + 'signup',
-      {
-        username,
         email,
         password,
       },
@@ -37,7 +26,31 @@ export class AuthService {
     );
   }
 
+  // Register method
+  register(companyName: string, dateOfIncorporation: string, directorName: string, phoneNumber: string, email: string, password: string, alternatePhoneNumber: string, place: string, district: string, state: string, pinCode: string): Observable<any> {
+    return this.http.post(
+      AUTH_API + 'companies/signup',  // Signup URL
+      {
+        companyName,
+        dateOfIncorporation,
+        directorName,
+        phoneNumber,
+        email,
+        password,
+        alternatePhoneNumber,
+        address: {
+          place,
+          district,
+          state,
+          pinCode
+        }
+      },
+      httpOptions
+    );
+  }
+
+  // Logout method
   logout(): Observable<any> {
-    return this.http.post(AUTH_API + 'signout', { }, httpOptions);
+    return this.http.post(AUTH_API + 'auth/signout', {}, httpOptions);
   }
 }

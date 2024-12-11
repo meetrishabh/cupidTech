@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router'; // Import Router
 import { AuthService } from '../_services/auth.service';
 
 @Component({
@@ -8,24 +9,45 @@ import { AuthService } from '../_services/auth.service';
 })
 export class RegisterComponent {
   form: any = {
-    username: null,
+    companyName: null,
     email: null,
-    password: null
+    password: null,
+    directorName: null,
+    dateOfIncorporation: null,
+    phoneNumber: null,
+    alternatePhoneNumber: null,
+    companyAddress: null,
+    district: null,
+    state: null,
+    pinCode: null
   };
   isSuccessful = false;
   isSignUpFailed = false;
   errorMessage = '';
 
-  constructor(private authService: AuthService) { }
+  constructor(
+    private authService: AuthService,
+    private router: Router // Inject Router
+  ) { }
 
   onSubmit(): void {
-    const { username, email, password } = this.form;
+    const {
+      companyName, email, password, directorName, dateOfIncorporation, phoneNumber,
+      alternatePhoneNumber, companyAddress, district, state, pinCode
+    } = this.form;
 
-    this.authService.register(username, email, password).subscribe({
+    // Send data to the register method in AuthService
+    this.authService.register(
+      companyName, dateOfIncorporation, directorName, phoneNumber, email, password,
+      alternatePhoneNumber, companyAddress, district, state, pinCode
+    ).subscribe({
       next: data => {
         console.log(data);
         this.isSuccessful = true;
         this.isSignUpFailed = false;
+
+        // Redirect to login page after successful sign-up
+        this.router.navigate(['/login']);
       },
       error: err => {
         this.errorMessage = err.error.message;

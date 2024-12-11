@@ -1,102 +1,70 @@
-<div class="col-md-12">
-  <div class="card card-container">
-    <img
-      id="profile-img"
-      src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-      class="profile-img-card"
-    />
-    @if (!isSuccessful) {
-    <form
-      name="form"
-      (ngSubmit)="f.form.valid && onSubmit()"
-      #f="ngForm"
-      novalidate
-    >
-      <div class="form-group">
-        <label for="username">Username</label>
-        <input
-          type="text"
-          class="form-control"
-          name="username"
-          [(ngModel)]="form.username"
-          required
-          minlength="3"
-          maxlength="20"
-          #username="ngModel"
-          [ngClass]="{ 'is-invalid': f.submitted && username.errors }"
-        />
-        @if (username.errors && f.submitted) {
-        <div class="invalid-feedback">
-          @if (username.errors['required']) {
-          <div>Username is required</div>
-          }
-          @if (username.errors['minlength']) {
-          <div>Username must be at least 3 characters</div>
-          }
-          @if (username.errors['maxlength']) {
-          <div>Username must be at most 20 characters</div>
-          }
-        </div>
-        }
-      </div>
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input
-          type="email"
-          class="form-control"
-          name="email"
-          [(ngModel)]="form.email"
-          required
-          email
-          #email="ngModel"
-          [ngClass]="{ 'is-invalid': f.submitted && email.errors }"
-        />
-        @if (email.errors && f.submitted) {
-        <div class="invalid-feedback">
-          @if (email.errors['required']) {
-          <div>Email is required</div>
-          }
-          @if (email.errors['email']) {
-          <div>Email must be a valid email address</div>
-          }
-        </div>
-        }
-      </div>
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input
-          type="password"
-          class="form-control"
-          name="password"
-          [(ngModel)]="form.password"
-          required
-          minlength="6"
-          #password="ngModel"
-          [ngClass]="{ 'is-invalid': f.submitted && password.errors }"
-        />
-        @if (password.errors && f.submitted) {
-        <div class="invalid-feedback">
-          @if (password.errors['required']) {
-          <div>Password is required</div>
-          }
-          @if (password.errors['minlength']) {
-          <div>Password must be at least 6 characters</div>
-          }
-        </div>
-        }
-      </div>
-      <div class="form-group">
-        <button class="btn btn-primary btn-block">Sign Up</button>
+<div class="container">
+  <!-- Left Panel -->
+  <div class="left-panel">
+    <div class="left-content">
+      <h1>Empowering Businesses with MyCupidTech</h1>
+      <p>Join us today and enhance your business capabilities with our cutting-edge solutions!</p>
+    </div>
+  </div>
+
+  <!-- Right Panel (Form Area) -->
+  <div class="right-panel">
+    <div class="card-container">
+      <div class="text-center">
+        <h3 class="text-theme-primary">Sign Up</h3>
+        <p>Please Sign Up to your account here</p>
       </div>
 
-      @if (f.submitted && isSignUpFailed) {
-      <div class="alert alert-warning">
-        Signup failed!<br />{{ errorMessage }}
+      <form #registerForm="ngForm" class="form-scroll" (ngSubmit)="onSubmit()">
+        <div class="form-group mt-2">
+          <label for="companyName">Company Name</label>
+          <input type="text" class="form-control" placeholder="Company Name" id="companyName" name="companyName" ngModel required />
+        </div>
+        <div class="form-group mt-2">
+          <label for="directorName">Director Name</label>
+          <input type="text" class="form-control" placeholder="Director Name" id="directorName" name="directorName" ngModel required />
+        </div>
+        <div class="form-group mt-2">
+          <label for="dateOfIncorporation">Date of Incorporation</label>
+          <input type="date" class="form-control" id="dateOfIncorporation" name="dateOfIncorporation" ngModel required />
+        </div>
+        <div class="form-group mt-2">
+          <label for="phoneNumber">Phone Number</label>
+          <input type="text" class="form-control" placeholder="Phone Number" id="phoneNumber" name="phoneNumber" ngModel required />
+        </div>
+
+        <!-- Address Field in Full Width -->
+        <div class="form-row mt-2">
+          <div class="col-12">
+            <label for="companyAddress">Company Address</label>
+            <input type="text" class="form-control" placeholder="Company Address" id="companyAddress" name="companyAddress" ngModel required />
+          </div>
+        </div>
+
+        <div class="form-row mt-2">
+          <div class="col-md-4">
+            <label for="district">District</label>
+            <input type="text" class="form-control" placeholder="District" id="district" name="district" ngModel required />
+          </div>
+          <div class="col-md-4">
+            <label for="state">State</label>
+            <input type="text" class="form-control" placeholder="State" id="state" name="state" ngModel required />
+          </div>
+          <div class="col-md-4">
+            <label for="pinCode">Pin code</label>
+            <input type="number" class="form-control" placeholder="Pin code" id="pinCode" name="pinCode" ngModel required />
+          </div>
+        </div>
+
+        <!-- Added margin-top to create a gap before the submit button -->
+        <div class="text-center mt-4">
+          <button class="btn btn-gradient" [disabled]="registerForm.invalid">Submit</button>
+        </div>
+      </form>
+
+      <div class="text-center mt-3">
+        <p>Already have an account? <a routerLink="/login">Login here</a></p>
       </div>
-      }
-    </form>
-    } @else {
-    <div class="alert alert-success">Your registration is successful!</div>
-    }
+    </div>
   </div>
 </div>

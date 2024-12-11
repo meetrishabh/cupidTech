@@ -9,25 +9,24 @@ import { UserService } from '../_services/user.service';
 export class HomeComponent implements OnInit {
   content?: string;
 
+  // Hardcoded analytics data for KPIs and tables
+  employeeStats = {
+    totalEmployees: 120,
+    departments: {
+      HR: 15,
+      IT: 40,
+      Sales: 30,
+      Marketing: 25,
+      Finance: 10
+    },
+    activeEmployees: 110,
+    newHires: 5,
+    avgPerformanceRating: 4.2
+  };
+
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
-    this.userService.getPublicContent().subscribe({
-      next: data => {
-        this.content = data;
-      },
-      error: err => {
-        if (err.error) {
-          try {
-            const res = JSON.parse(err.error);
-            this.content = res.message;
-          } catch {
-            this.content = `Error with status: ${err.status} - ${err.statusText}`;
-          }
-        } else {
-          this.content = `Error with status: ${err.status}`;
-        }
-      }
-    });
+    
   }
 }

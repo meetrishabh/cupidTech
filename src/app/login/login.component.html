@@ -1,68 +1,72 @@
-<div class="col-md-12">
-  <div class="card card-container">
-    <img
-      id="profile-img"
-      src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-      class="profile-img-card"
-    />
-    @if (!isLoggedIn) {
-    <form
-      name="form"
-      (ngSubmit)="f.form.valid && onSubmit()"
-      #f="ngForm"
-      novalidate
-    >
-      <div class="form-group">
-        <label for="username">Username</label>
-        <input
-          type="text"
-          class="form-control"
-          name="username"
-          [(ngModel)]="form.username"
-          required
-          #username="ngModel"
-          [ngClass]="{ 'is-invalid': f.submitted && username.errors }"
-        />
-        @if (username.errors && f.submitted) {
-        <div class="invalid-feedback">Username is required!</div>
-        }
+<head>
+  <!-- Link to Google Fonts for better typography -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Montserrat:wght@600&display=swap" rel="stylesheet">
+</head>
+
+<div class="container">
+  <div class="row full-height">
+    <!-- Left Side -->
+    <div class="col-md-6 left-panel">
+      <div class="left-content text-center text-white">
+        <h1 class="mb-4">Welcome Back</h1>
+        <p class="text-muted">
+          We offer a secure, intuitive, and seamless platform for connecting people with meaningful relationships.
+        </p>
       </div>
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input
-          type="password"
-          class="form-control"
-          name="password"
-          [(ngModel)]="form.password"
-          required
-          minlength="6"
-          #password="ngModel"
-          [ngClass]="{ 'is-invalid': f.submitted && password.errors }"
-        />
-        @if (password.errors && f.submitted) {
-        <div class="invalid-feedback">
-          @if (password.errors['required']) {
-          <div>Password is required</div>
-          }
-          @if (password.errors['minlength']) {
-          <div>Password must be at least 6 characters</div>
-          }
+    </div>
+
+    <!-- Right Side -->
+    <div class="col-md-6 right-panel d-flex align-items-center justify-content-center">
+      <div class="form-container p-5 shadow rounded">
+        <div class="text-center mb-4">
+          <h2 class="mb-3">Login</h2>
+          <p class="text-muted">Please enter your details to continue</p>
         </div>
-        }
-      </div>
-      <div class="form-group">
-        <button class="btn btn-primary btn-block">Login</button>
-      </div>
-      <div class="form-group">
-        @if (f.submitted && isLoginFailed) {
-        <div class="alert alert-danger" role="alert">
-          Login failed: {{ errorMessage }}
+        
+        <!-- Login Form -->
+        <div *ngIf="!isLoggedIn">
+          <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+            <div class="form-group mb-4">
+              <label for="email" class="form-label">Email</label>
+              <input type="text" class="form-control" name="email" placeholder="Enter your email" [(ngModel)]="form.email" required #email="ngModel" [ngClass]="{ 'is-invalid': f.submitted && email.errors }"/>
+              <div class="invalid-feedback" *ngIf="email.errors && f.submitted">
+                email is required!
+              </div>
+            </div>
+
+            <div class="form-group mb-4">
+              <label for="password" class="form-label">Password</label>
+              <input type="password" class="form-control" name="password" placeholder="Enter your password" [(ngModel)]="form.password" required minlength="6" #password="ngModel" [ngClass]="{ 'is-invalid': f.submitted && password.errors }"/>
+              <div class="invalid-feedback" *ngIf="password.errors && f.submitted">
+                <div *ngIf="password.errors['required']">Password is required</div>
+                <div *ngIf="password.errors['minlength']">Password must be at least 6 characters</div>
+              </div>
+            </div>
+
+            <div class="form-group text-center mb-4">
+              <button class="btn btn-gradient btn-block">Login</button>
+            </div>
+          </form>
+
+          <!-- Forgot Password Link -->
+          <div class="text-center">
+            <a routerLink="/forgot-password" class="forgot-password-link">Forgot Password?</a>
+          </div>
+          
+
+          <div class="text-center mt-4">
+            <p class="mb-0">
+              Don't have an account? 
+              <a routerLink="/register" class="text-primary fw-bold">Sign up here</a>
+            </p>
+          </div>
         </div>
-        }
+
+        <!-- Display logged-in message -->
+        <div *ngIf="isLoggedIn">
+          <div class="alert alert-success">Logged in as {{ roles }}.</div>
+        </div>
       </div>
-    </form>
-    } @else {
-    <div class="alert alert-success">Logged in as {{ roles }}.</div>
-    }
+    </div>
   </div>
 </div>

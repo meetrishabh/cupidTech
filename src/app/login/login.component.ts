@@ -9,7 +9,7 @@ import { StorageService } from '../_services/storage.service';
 })
 export class LoginComponent implements OnInit {
   form: any = {
-    username: null,
+    email: null,
     password: null
   };
   isLoggedIn = false;
@@ -27,18 +27,24 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(): void {
-    const { username, password } = this.form;
+    const { email, password } = this.form;
 
-    this.authService.login(username, password).subscribe({
+    // Call the login API using AuthService
+    this.authService.login(email, password).subscribe({
       next: data => {
+        // Save the user data on successful login
         this.storageService.saveUser(data);
 
+        // Set login states
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         this.roles = this.storageService.getUser().roles;
+
+        // Reload page to reflect changes
         this.reloadPage();
       },
       error: err => {
+        // Handle login error
         this.errorMessage = err.error.message;
         this.isLoginFailed = true;
       }
