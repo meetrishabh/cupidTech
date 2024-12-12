@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -12,6 +12,7 @@ import { HomeComponent } from './home/home.component';
 
 import { httpInterceptorProviders } from './_helpers/http.interceptor';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { AddEmployeeFormComponent } from './add-employee-form/add-employee-form.component';
 
 @NgModule({
   declarations: [
@@ -19,13 +20,15 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
     LoginComponent,
     RegisterComponent,
     HomeComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    AddEmployeeFormComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]

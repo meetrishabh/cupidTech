@@ -1,39 +1,23 @@
 <div class="container">
   <header class="jumbotron">
     <h1 class="display-4">Welcome to the Employee Management Dashboard</h1>
+    <!-- Add Employee Button -->
+    <button
+      style="background: linear-gradient(to right bottom, rgb(0, 105, 92), rgb(0, 77, 64));"
+      class="btn btn-primary float-right"
+      (click)="openAddEmployeeModal()"
+    >
+      Add Employee
+    </button>
   </header>
 
   <!-- KPIs Section -->
-  <div class="row">
-    <div class="col-md-3">
+  <div class="row mt-4">
+    <div class="col-md-3" *ngFor="let stat of kpiStats">
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title">Total Employees</h5>
-          <p class="card-text">{{ employeeStats.totalEmployees }}</p>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-3">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Active Employees</h5>
-          <p class="card-text">{{ employeeStats.activeEmployees }}</p>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-3">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">New Hires (This Month)</h5>
-          <p class="card-text">{{ employeeStats.newHires }}</p>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-3">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Average Performance Rating</h5>
-          <p class="card-text">{{ employeeStats.avgPerformanceRating }}</p>
+          <h5 class="card-title">{{ stat.title }}</h5>
+          <p class="card-text">{{ stat.value }}</p>
         </div>
       </div>
     </div>
@@ -53,67 +37,42 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>HR</td>
-            <td>{{ employeeStats.departments.HR }}</td>
-          </tr>
-          <tr>
-            <td>IT</td>
-            <td>{{ employeeStats.departments.IT }}</td>
-          </tr>
-          <tr>
-            <td>Sales</td>
-            <td>{{ employeeStats.departments.Sales }}</td>
-          </tr>
-          <tr>
-            <td>Marketing</td>
-            <td>{{ employeeStats.departments.Marketing }}</td>
-          </tr>
-          <tr>
-            <td>Finance</td>
-            <td>{{ employeeStats.departments.Finance }}</td>
+          <tr *ngFor="let department of departmentStats">
+            <td>{{ department.name }}</td>
+            <td>{{ department.count }}</td>
           </tr>
         </tbody>
       </table>
     </div>
   </div>
 
-  <!-- Employee Performance Table -->
-  <div class="card mt-4">
-    <div class="card-header">
-      <h4>Employee Performance</h4>
-    </div>
-    <div class="card-body">
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>Employee Name</th>
-            <th>Performance Rating</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Employee 1</td>
-            <td>4.2</td>
-          </tr>
-          <tr>
-            <td>Employee 2</td>
-            <td>4.0</td>
-          </tr>
-          <tr>
-            <td>Employee 3</td>
-            <td>4.5</td>
-          </tr>
-          <tr>
-            <td>Employee 4</td>
-            <td>4.1</td>
-          </tr>
-          <tr>
-            <td>Employee 5</td>
-            <td>4.3</td>
-          </tr>
-        </tbody>
-      </table>
+  <!-- Add Employee Modal -->
+  <div
+    class="modal fade glass-modal"
+    id="addEmployeeModal"
+    tabindex="-1"
+    aria-labelledby="addEmployeeModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div
+          class="modal-header text-white"
+          style="background: linear-gradient(to bottom right, #00695c, #004d40);"
+        >
+          <h5 class="modal-title" id="addEmployeeModalLabel">Add Employee</h5>
+          <button
+  type="button"
+  class="btn-close btn-close-white"
+  (click)="closeModal()"
+  aria-label="Close"
+></button>
+
+        </div>
+        <div class="modal-body">
+          <app-add-employee-form></app-add-employee-form>
+        </div>
+      </div>
     </div>
   </div>
 </div>

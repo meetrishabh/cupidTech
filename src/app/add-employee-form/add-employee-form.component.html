@@ -1,0 +1,58 @@
+<form [formGroup]="addEmployeeForm" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label for="name" class="form-label">Name</label>
+      <input
+        type="text"
+        id="name"
+        class="form-control"
+        formControlName="name"
+      />
+      <div class="text-danger" *ngIf="addEmployeeForm.get('name')?.touched && addEmployeeForm.get('name')?.invalid">
+        Name is required.
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="department" class="form-label">Department</label>
+      <select id="department" class="form-control" formControlName="department">
+        <option *ngFor="let department of departments" [value]="department">
+          {{ department }}
+        </option>
+      </select>
+      <div class="text-danger" *ngIf="addEmployeeForm.get('department')?.touched && addEmployeeForm.get('department')?.invalid">
+        Department is required.
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input
+        type="email"
+        id="email"
+        class="form-control"
+        formControlName="email"
+      />
+      <div class="text-danger" *ngIf="addEmployeeForm.get('email')?.touched && addEmployeeForm.get('email')?.invalid">
+        Valid email is required.
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="phone" class="form-label">Phone</label>
+      <input
+        type="text"
+        id="phone"
+        class="form-control"
+        formControlName="phone"
+      />
+      <div class="text-danger" *ngIf="addEmployeeForm.get('phone')?.touched && addEmployeeForm.get('phone')?.invalid">
+        Phone is required.
+      </div>
+    </div>
+    <button
+      type="submit"
+      class="btn btn-primary w-100"
+      [disabled]="addEmployeeForm.invalid"
+      style="background: linear-gradient(to bottom right, #00695c, #004d40);"
+    >
+      Submit
+    </button>
+  </form>
+  

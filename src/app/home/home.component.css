@@ -21,3 +21,27 @@
     width: 100%;
   }
   
+  /* Glass Background for Modal */
+.glass-modal .modal-dialog {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(8px);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Smooth Modal Close Button */
+  .btn-close {
+    opacity: 0.8;
+    transition: opacity 0.3s ease-in-out;
+  }
+  
+  .btn-close:hover {
+    opacity: 1;
+  }
+  
+  /* Add some padding around the modal content */
+  .modal-body {
+    padding: 20px;
+  }
+  
